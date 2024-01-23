@@ -1,7 +1,7 @@
 import { requestOptions } from "../config/coincapConfig";
 import { useEffect, useState } from "react";
 import CoinItem from "./CoinItem";
-function Coins(){
+function Coins(props){
     const [coins, setCoins] = useState([]);
     const getCoins = () =>{
           fetch("https://api.coincap.io/v2/assets", requestOptions)
@@ -16,7 +16,7 @@ function Coins(){
     return(
         <>
         <h1>Coins</h1>
-        {coins.map((item, index) => <CoinItem item={item} key={index}/>)}
+        {coins.map((item, index) => <CoinItem item={item} key={index} addToFavorites={props.addToFavorites}/>)}
         </>
     )
 }

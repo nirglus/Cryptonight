@@ -4,6 +4,15 @@ import CoinItem from "../components/CoinItem";
 import { useState } from "react";
 function Home(props){
     const [searchResult, setSearchResult] = useState(null);
+    const [favorites, setFavorites] = useState([]);
+
+    const addToFavorites = (item) =>{
+      console.log(item);
+      if (!favorites.includes(item)) {
+        setFavorites(prevFavorites => [...prevFavorites, item]);
+      }
+      console.log(favorites);
+    }
 
     const handleSearchResult = (result) => {
         setSearchResult(result);
@@ -22,10 +31,10 @@ function Home(props){
         {searchResult ? (
           <>
             <h2>Search Result</h2>
-            <CoinItem item={searchResult} />
+            <CoinItem item={searchResult} addToFavorites={addToFavorites}/>
           </>
         ) : (
-          <Coins />
+          <Coins addToFavorites={addToFavorites}/>
         )}
       </div>
     )}
