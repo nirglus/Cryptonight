@@ -13,7 +13,7 @@ function CoinItem(props){
             {isFavExist ? 
             <button onClick={addToFavorites}>{props.isFav(coin.id) ? "Remove" : "Add to favorites" }</button>
             :
-            <p>Register</p>
+            <button onClick={props.removeCoin}>Remove</button>
             }
         </div>
     )

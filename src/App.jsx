@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import NavBar from './components/NavBar';
 import Auth from './pages/Auth';
 import Footer from './components/Footer';
+import Favorites from './pages/Favorites';
 // import './App.css'
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home user={user}/>}/>
           <Route path='/about'/>
-          <Route path='/favorites'/>
+          <Route path='/favorites'element={<Favorites user={user}/>} />
           <Route path='/login' element={<Auth setUser={setUser} />} />
         </Routes>
     <Footer />
