@@ -1,17 +1,25 @@
 import Coins from "../components/Coins";
 import Search from "../components/Search";
 import CoinItem from "../components/CoinItem";
-import { useState } from "react";
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "../config/firebaseConfig";
+import { useState, useEffect } from "react";
 function Home(props){
     const [searchResult, setSearchResult] = useState(null);
     const [favorites, setFavorites] = useState([]);
 
     const addToFavorites = (item) =>{
-      console.log(item);
-      if (!favorites.includes(item)) {
-        setFavorites(prevFavorites => [...prevFavorites, item]);
+      if(isFav(item.id)){
+        const newFavorites = favorites.filter(coinID => coinID!=item.id);
+        setFavorites(newFavorites);
       }
-      console.log(favorites);
+      else{
+        setFavorites([...favorites, item.id])
+      }
+    }
+
+    const isFav = (coinID) =>{
+      return favorites.includes(coinID);
     }
 
     const handleSearchResult = (result) => {
@@ -21,6 +29,20 @@ function Home(props){
     const handleResetSearch = () => {
         setSearchResult(null);
     };
+    useEffect(() =>{
+      const addFavoritesToDB = async (user, favorites) =>{
+        try {
+            const newFavoritesRef = doc(db, "favorites", user.id);
+            await setDoc(newFavoritesRef, {favoritesID: favorites, id: user.id});
+            console.log("User's favorites added to the db succesfully!");
+          } catch (error) {
+            console.error("Error adding document: ", error);
+          }
+    }
+      addFavoritesToDB(props.user, favorites);
+      console.log(favorites);
+    }, [favorites]);
+
     return(
     <>
     {!props.user ? (
@@ -31,10 +53,10 @@ function Home(props){
         {searchResult ? (
           <>
             <h2>Search Result</h2>
-            <CoinItem item={searchResult} addToFavorites={addToFavorites}/>
+            <CoinItem item={searchResult} addToFavorites={addToFavorites} isFav={isFav}/>
           </>
         ) : (
-          <Coins addToFavorites={addToFavorites}/>
+          <Coins addToFavorites={addToFavorites} isFav={isFav}/>
         )}
       </div>
     )}

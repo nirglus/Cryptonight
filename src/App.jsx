@@ -35,7 +35,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <NavBar/>
+    <NavBar user={user}/>
     {user ? <button onClick={userSignOut}>Sign out</button> : null}
         <Routes>
           <Route path='/' element={<Home user={user}/>}/>
