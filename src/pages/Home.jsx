@@ -1,16 +1,19 @@
 import Coins from "../components/Coins";
 import Search from "../components/Search";
 import CoinItem from "../components/CoinItem";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
+import { getAuth } from "@firebase/auth";
 import { useState, useEffect } from "react";
-function Home(props){
+function Home(){
     const [searchResult, setSearchResult] = useState(null);
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useState(null);
+    const auth = getAuth();
+    const user = auth.currentUser;
 
     const addToFavorites = (item) =>{
       if(isFav(item.id)){
-        const newFavorites = favorites.filter(coinID => coinID!=item.id);
+        const newFavorites = favorites.filter(coinID => coinID != item.id);
         setFavorites(newFavorites);
       }
       else{
@@ -27,25 +30,48 @@ function Home(props){
     };
 
     const handleResetSearch = () => {
-        setSearchResult(null);
+      setSearchResult(null);
     };
+    const newFavoritesRef = user ? doc(db, "favorites", user.uid) : null;
+    
+    useEffect(() =>{
+      const getFavoritesFromDB = async () =>{
+        try{
+          const docData = await getDoc(newFavoritesRef);
+          if(docData.data()){
+
+            setFavorites(docData.data().favoritesID)
+          } else{
+            setFavorites([]);
+          }
+        }catch (error){
+          console.log(error);
+        }
+      }
+      if(newFavoritesRef){
+        getFavoritesFromDB();
+      }
+    },[user]);
+
     useEffect(() =>{
       const addFavoritesToDB = async (user, favorites) =>{
         try {
-            const newFavoritesRef = doc(db, "favorites", user.id);
-            await setDoc(newFavoritesRef, {favoritesID: favorites, id: user.id});
+            await setDoc(newFavoritesRef, {favoritesID: favorites, id: user.uid});
             console.log("User's favorites added to the db succesfully!");
           } catch (error) {
             console.error("Error adding document: ", error);
           }
     }
-      addFavoritesToDB(props.user, favorites);
-      console.log(favorites);
+      if(favorites){
+        addFavoritesToDB(user, favorites);
+        console.log(favorites);
+      }
     }, [favorites]);
+    
 
     return(
     <>
-    {!props.user ? (
+    {!user ? (
       <h1>Please login or register</h1>
     ) : (
       <div className="home">
@@ -53,10 +79,10 @@ function Home(props){
         {searchResult ? (
           <>
             <h2>Search Result</h2>
-            <CoinItem item={searchResult} addToFavorites={addToFavorites} isFav={isFav}/>
+            <CoinItem item={searchResult} addToFavorites={addToFavorites} isFav={isFav} favorites={favorites}/>
           </>
         ) : (
-          <Coins addToFavorites={addToFavorites} isFav={isFav}/>
+          <Coins addToFavorites={addToFavorites} isFav={isFav} favorites={favorites}/>
         )}
       </div>
     )}

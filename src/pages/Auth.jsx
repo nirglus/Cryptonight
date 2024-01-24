@@ -38,6 +38,7 @@ function Auth(props){
             )
             props.setUser(userCard.user);
             console.log("Logged in succesfully");
+            console.log(userCard.user);
             }else {
                 const userCard = await createUserWithEmailAndPassword(
                   auth,

@@ -5,8 +5,7 @@ function NavBar(props){
         <nav>
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
-            <Link to="/favorites">Favorites</Link>
-            {!props.user ? <Link to="/login">Login</Link> : null}
+            {!props.user ? <Link to="/login">Login</Link> : <Link to="/favorites">Favorites</Link>}
             
         </nav>
     )
