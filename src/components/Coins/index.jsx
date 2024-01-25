@@ -1,6 +1,6 @@
-import { requestOptions } from "../config/coincapConfig";
+import { requestOptions } from "../../config/coincapConfig";
 import { useEffect, useState } from "react";
-import CoinItem from "./CoinItem";
+import CoinItem from "../CoinItem";
 function Coins(props){
     const [coins, setCoins] = useState([]);
     const getCoins = () =>{

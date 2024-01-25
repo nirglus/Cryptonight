@@ -1,4 +1,4 @@
-import { requestOptions } from "../config/coincapConfig";
+import { requestOptions } from "../../config/coincapConfig";
 import { useState } from "react";
 
 function Search(props){

@@ -1,8 +1,9 @@
-import { db } from "../config/firebaseConfig";
+import { db } from "../../config/firebaseConfig";
 import { getDoc, doc , arrayRemove, updateDoc} from "firebase/firestore";
 import { useState ,useEffect } from "react";
-import { requestOptions } from "../config/coincapConfig";
-import CoinItem from "../components/CoinItem";
+import { Link } from "react-router-dom";
+import { requestOptions } from "../../config/coincapConfig";
+import CoinItem from "../../components/CoinItem";
 
 function Favorites({user}){
     const [dbFavorites, setDbFavorites] = useState([]);
@@ -62,6 +63,10 @@ function Favorites({user}){
     }, [dbFavorites]);
     
       return (
+        <>
+        {!user ? (
+          <h1>Please <Link className="homeRegis" to="/login">login</Link> or <Link className="homeRegis" to="/login">register</Link></h1>
+        ) : (
         <div className="favorites">
           <h1>Favorites</h1>
           <div className="coinsDisplay">
@@ -70,7 +75,9 @@ function Favorites({user}){
             ))}
           </div>
         </div>
-      );
+      )
     }
+        </>
+        )}
 
 export default Favorites;

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ethereumIcon from "../../assets/icon-ethereum.svg";
 import "./NavBar.css"
 
 function NavBar(props){
@@ -6,7 +7,7 @@ function NavBar(props){
         <nav className="navbar">
             <div className="container">
                 <div className="logo">
-                    <h1>CryptoNight</h1>
+                    <h1><img src={ethereumIcon} alt="cryptonight-logo" /> CryptoNight</h1>
                 </div>
                 <div className="nav-elements">
                     <ul>

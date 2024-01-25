@@ -1,10 +1,11 @@
-import Coins from "../components/Coins";
-import Search from "../components/Search";
-import CoinItem from "../components/CoinItem";
+import Coins from "../../components/Coins";
+import Search from "../../components/Search";
+import CoinItem from "../../components/CoinItem";
 import { setDoc, doc, getDoc } from "firebase/firestore";
-import { db } from "../config/firebaseConfig";
+import { db } from "../../config/firebaseConfig";
 import { getAuth } from "@firebase/auth";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 function Home(){
     const [searchResult, setSearchResult] = useState(null);
     const [favorites, setFavorites] = useState(null);
@@ -72,7 +73,7 @@ function Home(){
     return(
     <>
     {!user ? (
-      <h1>Please login or register</h1>
+      <h1>Please <Link className="homeRegis" to="/login">login</Link> or <Link className="homeRegis" to="/login">register</Link></h1>
     ) : (
       <div className="home">
         <Search handleSearchResult={handleSearchResult} handleResetSearch={handleResetSearch} />
