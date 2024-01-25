@@ -44,8 +44,12 @@ input:focus{
   margin: 10px;
   transition: 0.3s;
 }
-
 .button:hover {
     background-color: #772ce8;
 }
 
+.coinsDisplay{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}

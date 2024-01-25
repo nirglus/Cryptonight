@@ -64,11 +64,11 @@ function Favorites({user}){
       return (
         <div className="favorites">
           <h1>Favorites</h1>
-          <ul>
+          <div className="coinsDisplay">
             {apiFavorites.map((favorite, index) => (
               <CoinItem item={favorite} key={index} removeCoin={() => removeCoin(favorite.id)} />
             ))}
-          </ul>
+          </div>
         </div>
       );
     }

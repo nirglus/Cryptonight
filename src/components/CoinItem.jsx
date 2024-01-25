@@ -31,7 +31,6 @@ function CoinItem(props){
             <p>${Number(coin.priceUsd).toFixed(2)}</p>
             <div className="symbolAndChange">
               <span className="symbol">
-                {/* <img src="src/assets/icon-ethereum.svg" alt="" /> */}
                 {coin.symbol}
               </span>
               <small className={`changePercent ${Number(coin.changePercent24Hr) < 0 ? 'negative' : 'positive'}`}>

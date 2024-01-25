@@ -16,8 +16,11 @@ function Coins(props){
     return(
         <>
         <h1>Coins</h1>
-        {coins.map((item, index) => <CoinItem item={item} key={index} addToFavorites={props.addToFavorites} isFav={props.isFav} favorites={props.favorites}/>)}
+        <div className="coinsDisplay">
+            {coins.map((item, index) => <CoinItem item={item} key={index} addToFavorites={props.addToFavorites} isFav={props.isFav} favorites={props.favorites}/>)}
+        </div>
         </>
+       
     )
 }
 
