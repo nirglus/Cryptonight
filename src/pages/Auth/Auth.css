@@ -1,0 +1,31 @@
+.loginCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 600px;
+    height: 400px;
+    padding: 15px;
+    background-color: hsl(216, 50%, 16%);
+    gap: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 9px 20px 15px rgba(0, 5, 31, 0.3);
+    align-items: center;
+}
+.loginCont form{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    padding: 25px;
+    gap: 15px;
+}
+.loginCont button{
+    margin: 10px 0;
+}
+.loginCont p{
+    transition: 0.3s;
+}
+.loginCont p:hover{
+    color: #9147ff;
+    cursor: pointer;
+}

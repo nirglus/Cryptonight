@@ -5,13 +5,14 @@ import { auth } from "../../config/firebaseConfig";
 import { db } from "../../config/firebaseConfig";
 import SignUp from "../../components/SignUp";
 import Login from "../../components/Login";
+import "./Auth.css";
 
 function Auth(props){
     const [isLoginMode, setIsLoginMode] = useState(true);
     const [formData, setFormData] = useState({});
 
     const handleToggle = () =>{
-        setIsLoginMode(!setIsLoginMode);
+        setIsLoginMode(!isLoginMode);
     }
 
     const changeHandler = (e) =>{
@@ -49,6 +50,7 @@ function Auth(props){
                 props.setUser(userCard.user);
                 addUserToDB(userCard);
               }
+              window.location.href = '/';
         };
 
         return (
