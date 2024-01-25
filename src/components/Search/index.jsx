@@ -1,5 +1,6 @@
 import { requestOptions } from "../../config/coincapConfig";
 import { useState } from "react";
+import "./Search.css"
 
 function Search(props){
     const [searchInput, setSearchInput] = useState('');
@@ -30,7 +31,7 @@ function Search(props){
     }
     
     return(
-        <>
+        <div className="searchBar">
         <input
           type="text"
           placeholder="Enter a coin name:"
@@ -38,7 +39,7 @@ function Search(props){
           onChange={handleInputChange}
         />
         <button className="button" onClick={handleReset}>Reset</button>
-      </>
+      </div>
     )
 }
 
