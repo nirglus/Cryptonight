@@ -9,49 +9,45 @@ import "./Auth.css";
 
 function Auth(props){
     const [isLoginMode, setIsLoginMode] = useState(true);
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({ email: "", password: "", nickname: "" });
 
-    const handleToggle = () =>{
+    const handleToggle = () => {
         setIsLoginMode(!isLoginMode);
     }
 
-    const changeHandler = (e) =>{
-        setFormData({...formData, [e.target.name]: e.target.value});
+    const changeHandler = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    const addUserToDB = async (userCard) =>{
+    const addUserToDB = async (user) => {
         try {
-            const newUserRef = doc(db, "users", userCard.user.uid);
-            await setDoc(newUserRef, {email: userCard.user.email, id: userCard.user.uid});
-            console.log("User added to the db succesfully!");
-          } catch (error) {
+            const newUserRef = doc(db, "users", user.uid);
+            await setDoc(newUserRef, { email: user.email, id: user.uid, nickname: formData.nickname });
+            console.log("User added to the db successfully!");
+        } catch (error) {
             console.error("Error adding document: ", error);
-          }
+        }
     }
-    const submitHandler = async (e) =>{
-        e.preventDefault();
 
-        if(isLoginMode){
-            const userCard = await signInWithEmailAndPassword(
-                auth,
-                formData.email,
-                formData.password
-            )
+    const submitHandler = async (e) => {
+        e.preventDefault();
+    
+        try {
+            let userCard;
+            if (isLoginMode) {
+                userCard = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+                console.log("Logged in successfully");
+            } else {
+                userCard = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+                console.log("Registered successfully");
+                await addUserToDB(userCard.user);
+            }
             props.setUser(userCard.user);
-            console.log("Logged in succesfully");
-            console.log(userCard.user);
-            }else {
-                const userCard = await createUserWithEmailAndPassword(
-                  auth,
-                  formData.email,
-                  formData.password
-                );
-                console.log("Registered succesfully");
-                props.setUser(userCard.user);
-                addUserToDB(userCard);
-              }
-              window.location.href = '/';
-        };
+            window.location.href = '/';
+        } catch (error) {
+            console.error("Error: ", error.message);
+        }
+    };
 
         return (
             <div className="loginCont">

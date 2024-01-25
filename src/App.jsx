@@ -8,7 +8,6 @@ import Auth from './pages/Auth';
 import Footer from './components/Footer';
 import Favorites from './pages/Favorites';
 import Search from './components/Search';
-// import './App.css'
 
 function App() {
   const [user, setUser] = useState(null);
