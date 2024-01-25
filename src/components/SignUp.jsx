@@ -6,7 +6,7 @@ function SignUp(props){
             <input type="email" name="email" onChange={props.changeHandler}/>
             <label htmlFor="password">Enter your password:</label>
             <input type="password" name="password" onChange={props.changeHandler}/>
-            <button type="submit">Register</button>
+            <button className="button" type="submit">Register</button>
         </form>
         </>
     )

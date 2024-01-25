@@ -1,12 +1,30 @@
 import { Link } from "react-router-dom";
+import "./NavBar.css"
 
 function NavBar(props){
     return(
-        <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-            {!props.user ? <Link to="/login">Login</Link> : <Link to="/favorites">Favorites</Link>}
-            
+        <nav className="navbar">
+            <div className="container">
+                <div className="logo">
+                    <h1>CryptoNight</h1>
+                </div>
+                <div className="nav-elements">
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/about">About</Link>
+                        </li>
+                        <li>
+                            {!props.user ? <Link to="/login">Login</Link> : <Link to="/favorites">Favorites</Link>}
+                        </li>
+                        <li>
+                        {props.user ? <button className="button" onClick={props.userSignOut}>Sign out</button> : null}
+                        </li>
+                    </ul>
+                </div>      
+            </div>  
         </nav>
     )
 }

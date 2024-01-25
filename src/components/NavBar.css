@@ -1,0 +1,39 @@
+.container {
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .navbar {
+    height: 60px;
+    width: 100%;
+    position: relative;
+  }
+  .nav-elements ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+  }
+  
+  .nav-elements ul li:not(:last-child) {
+    margin-right: 60px;
+  }
+  
+  .nav-elements ul a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  
+  .nav-elements ul a:active, .nav-elements ul a:hover {
+    color: #9147ff;
+    font-weight: 500;
+    position: relative;
+  }
+  

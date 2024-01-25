@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import Auth from './pages/Auth';
 import Footer from './components/Footer';
 import Favorites from './pages/Favorites';
+import Search from './components/Search';
 // import './App.css'
 
 function App() {
@@ -36,13 +37,13 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <NavBar user={user}/>
-    {user ? <button onClick={userSignOut}>Sign out</button> : null}
+    <NavBar user={user} userSignOut={userSignOut}/>
         <Routes>
           <Route path='/' element={<Home user={user}/>}/>
           <Route path='/about'/>
           <Route path='/favorites'element={<Favorites user={user}/>} />
           <Route path='/login' element={<Auth setUser={setUser} />} />
+          <Route path='/coins:id' element={<Search />} />
         </Routes>
     <Footer />
     </BrowserRouter>

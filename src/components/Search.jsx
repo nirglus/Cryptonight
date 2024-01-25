@@ -37,7 +37,7 @@ function Search(props){
           value={searchInput}
           onChange={handleInputChange}
         />
-        <button onClick={handleReset}>Reset</button>
+        <button className="button" onClick={handleReset}>Reset</button>
       </>
     )
 }
