@@ -40,7 +40,7 @@ function App() {
     <NavBar user={user} userSignOut={userSignOut}/>
         <Routes>
           <Route path='/' element={<Home user={user}/>}/>
-          <Route path='/about' element={<About />}/>
+          <Route path='/about' element={<About user={user}/>}/>
           <Route path='/favorites'element={<Favorites user={user}/>} />
           <Route path='/login' element={<Auth setUser={setUser} />} />
           <Route path='/coins:id' element={<Search />} />

@@ -5,6 +5,7 @@
     width: 600px;
     height: 400px;
     padding: 15px;
+    margin-top: 15px;
     background-color: hsl(216, 50%, 16%);
     gap: 10px;
     border-radius: 10px;
