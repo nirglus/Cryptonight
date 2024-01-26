@@ -1,0 +1,35 @@
+.about{
+    display: flex;
+    width: 98vw;
+    justify-content: space-between;
+}
+.about-right{
+    background-image: url(../../assets/bitcoinBG2.jpg);
+    width: 50vw;
+    height: 90vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: hue-rotate(80deg);
+}
+.about-left{
+    display: flex;
+    align-items: center;
+    width: 48vw;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.about-left a{
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+    width: 150px;
+    text-align: center;
+    transition: 0.3s;
+}
+.about-left a:hover{
+    border-color: #0bd7df;
+    color: #0bd7df;
+}
